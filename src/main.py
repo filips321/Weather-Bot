@@ -1,9 +1,10 @@
 from weather import *
-from telegram import *
+from chat import *
+import asyncio
 
 if __name__ == "__main__":
 
     weather = download_weather(read_geo_data())
     plot_charts(weather)
 
-    send_message_telegram(read_credentials(), 'hej')
+    asyncio.run(send_message_telegram(read_credentials(), 'test bota'))

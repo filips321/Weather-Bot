@@ -55,9 +55,9 @@ def download_weather(geo_data):
 def plot_charts(df):
     # Plotting
     df.plot(kind='line', x='date', y='temperature_2m')
-    plt.title('Temperatura [°C] - ' + str(date.today().strftime('%B %d, %Y')))
+    plt.title('Temperature [°C] - ' + str(date.today().strftime('%B %d, %Y')))
     df.plot(kind='bar', x='date', y='rain')
-    plt.title('Deszcz [mm] - ' + str(date.today().strftime('%B %d, %Y')))
+    plt.title('Rain [mm] - ' + str(date.today().strftime('%B %d, %Y')))
     df.plot(kind='line', x='date', y='wind_speed_10m')
-    plt.title('Wiatr [m/s] - ' + str(date.today().strftime('%B %d, %Y')))
+    plt.title('Wind [m/s] - ' + str(date.today().strftime('%B %d, %Y')))
     # plt.show()
