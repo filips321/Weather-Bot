@@ -1,0 +1,2 @@
+{"latitude": 52.21,
+"longitude": 20.89}
