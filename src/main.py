@@ -15,3 +15,4 @@ if __name__ == "__main__":
     asyncio.run(send_message_telegram(read_credentials(), plots[0]))
     asyncio.run(send_message_telegram(read_credentials(), plots[1]))
     asyncio.run(send_message_telegram(read_credentials(), plots[2]))
+    asyncio.run(send_message_telegram(read_credentials(), '========== \U0001F9FF =========='))
