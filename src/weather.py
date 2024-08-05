@@ -60,7 +60,7 @@ def plot_charts(df):
     plot_temperature_2m = df.plot(kind='line', x='date_hour', y='temperature_2m', color='#0A9036', legend=False,
                                        xlabel='', ylabel='')
     plt.title('Temperature - ' + date.today().strftime("%B %d, %Y"), fontweight='bold')
-    plt.xlabel('Hour')
+    plt.xlabel('Time [h]')
     plt.ylabel('Temperature [°C]')
     plt.ylim(df['temperature_2m'].min() - 5, df['temperature_2m'].max() + 5)
     plt.xticks(np.arange(df['date_hour'].min(), df['date_hour'].max() + 1, 1), rotation=45)
@@ -71,7 +71,7 @@ def plot_charts(df):
 
     plot_rain = df.plot(kind='bar', x='date_hour', y='rain', color='#0091FF', legend=False, xlabel='', ylabel='')
     plt.title('Rain - ' + date.today().strftime("%B %d, %Y"), fontweight='bold')
-    plt.xlabel('Hour')
+    plt.xlabel('Time [h]')
     plt.ylabel('Rain [mm]')
     plt.ylim(df['rain'].min(), df['rain'].max() + 5)
     plot_rain.set_xticklabels(np.arange(df['date_hour'].min(), df['date_hour'].max() + 1, 1))
@@ -83,7 +83,7 @@ def plot_charts(df):
     plot_wind_speed_10m = df.plot(kind='line', x='date_hour', y='wind_speed_10m', color='#FF9A00', legend=False, xlabel='',
                                   ylabel='')
     plt.title('Wind - ' + date.today().strftime("%B %d, %Y"), fontweight='bold')
-    plt.xlabel('Hour')
+    plt.xlabel('Time [h]')
     plt.ylabel('Wind [m/s]')
     plt.ylim(0, df['wind_speed_10m'].max() + 5)
     plt.xticks(np.arange(df['date_hour'].min(), df['date_hour'].max() + 1, 1), rotation=45)
