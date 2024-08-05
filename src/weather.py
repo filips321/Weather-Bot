@@ -1,7 +1,8 @@
 import openmeteo_requests
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
-from datetime import date
+from datetime import datetime, timedelta, time
 import json
 
 
@@ -47,6 +48,7 @@ def download_weather(geo_data):
                    "wind_speed_10m": hourly_wind_speed_10m}
 
     hourly_df = pd.DataFrame(data=hourly_data).tail(18)
+    hourly_df['date_hour'] = hourly_df['date'].dt.hour
     print(hourly_df)
 
     return hourly_df
@@ -54,13 +56,32 @@ def download_weather(geo_data):
 
 def plot_charts(df):
     # Plotting
-    plot_temperature_2m_plot = df.plot(kind='line', x='date', y='temperature_2m')
-    print(type(plot_temperature_2m_plot))
-    plt.title('Temperature [°C] - ' + str(date.today().strftime('%B %d, %Y')))
-    plot_rain = df.plot(kind='bar', x='date', y='rain')
-    plt.title('Rain [mm] - ' + str(date.today().strftime('%B %d, %Y')))
-    plot_wind_speed_10m = df.plot(kind='line', x='date', y='wind_speed_10m')
-    plt.title('Wind [m/s] - ' + str(date.today().strftime('%B %d, %Y')))
+    plot_temperature_2m_plot = df.plot(kind='line', x='date_hour', y='temperature_2m', color='#0A9036', legend=False,
+                                       xlabel='', ylabel='')
+    plt.title('Temperature [°C]', fontweight='bold')
+    plt.ylim(df['temperature_2m'].min() - 5, df['temperature_2m'].max() + 5)
+    plt.xticks(np.arange(df['date_hour'].min(), df['date_hour'].max() + 1, 1))
+    plt.xlim(df['date_hour'].min(), df['date_hour'].max())
+    plt.text(df['date_hour'].mean() - 1.5, df['temperature_2m'].max() + 4,
+             'avg. ' + str(round(df['temperature_2m'].mean(), 1)) + ' °C', fontsize=11, style='italic')
+
+    plot_rain = df.plot(kind='bar', x='date_hour', y='rain', color='#0091FF', legend=False, xlabel='', ylabel='')
+    plt.title('Rain [mm]', fontweight='bold')
+    plt.ylim(0, df['rain'].max() + 5)
+    plt.xticks(np.arange(df['date_hour'].min(), df['date_hour'].max() + 1, 1))
+    plt.xlim(df['date_hour'].min(), df['date_hour'].max())
+    plt.text(df['date_hour'].mean() - 1.5, df['rain'].max() + 4,
+             'avg. ' + str(round(df['rain'].mean(), 1)) + ' mm', fontsize=11, style='italic')
+
+    plot_wind_speed_10m = df.plot(kind='line', x='date_hour', y='wind_speed_10m', color='#FF9A00', legend=False, xlabel='',
+                                  ylabel='')
+    plt.title('Wind [m/s]', fontweight='bold')
+    plt.ylim(0, df['wind_speed_10m'].max() + 5)
+    plt.xticks(np.arange(df['date_hour'].min(), df['date_hour'].max() + 1, 1))
+    plt.xlim(df['date_hour'].min(), df['date_hour'].max())
+    plt.text(df['date_hour'].mean() - 1.5, df['wind_speed_10m'].max() + 4,
+             'avg. ' + str(round(df['wind_speed_10m'].mean(), 1)) + ' m/s', fontsize=11, style='italic')
+
     # plt.show()
 
     return plot_temperature_2m_plot, plot_rain, plot_wind_speed_10m
