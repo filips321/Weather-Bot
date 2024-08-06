@@ -4,8 +4,8 @@ import asyncio
 from datetime import date
 
 
-# Option 1 - AWS
-def lambda_handler(event, context):
+# Option 1 - local
+if __name__ == "__main__":
     df_weather = download_weather(read_geo_data())
     plots = plot_charts(df_weather)
 
@@ -18,14 +18,10 @@ def lambda_handler(event, context):
     asyncio.run(send_message_telegram(read_credentials(), plots[1]))
     asyncio.run(send_message_telegram(read_credentials(), plots[2]))
     asyncio.run(send_message_telegram(read_credentials(), '========== \U0001F9FF =========='))
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Lambda implemented properly!')
-    }
 
 
-# Option 2 - local
-# if __name__ == "__main__":
+# Option 2 - AWS
+# def lambda_handler(event, context):
 #     df_weather = download_weather(read_geo_data())
 #     plots = plot_charts(df_weather)
 #
@@ -38,3 +34,7 @@ def lambda_handler(event, context):
 #     asyncio.run(send_message_telegram(read_credentials(), plots[1]))
 #     asyncio.run(send_message_telegram(read_credentials(), plots[2]))
 #     asyncio.run(send_message_telegram(read_credentials(), '========== \U0001F9FF =========='))
+#     return {
+#         'statusCode': 200,
+#         'body': json.dumps('Lambda implemented properly!')
+#     }

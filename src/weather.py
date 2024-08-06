@@ -67,6 +67,7 @@ def plot_charts(df):
     plt.xlim(df['date_hour'].min(), df['date_hour'].max())
     plt.text(df['date_hour'].mean() - 1, df['temperature_2m'].max() + 4,
              'avg. ' + str(round(df['temperature_2m'].mean(), 1)) + ' °C', fontsize=11, style='italic')
+    plt.grid(color='#DEDEDE', linestyle='--', linewidth=0.5)
     plt.figure(1).set_figwidth(10)
 
     plot_rain = df.plot(kind='bar', x='date_hour', y='rain', color='#0091FF', legend=False, xlabel='', ylabel='')
@@ -78,6 +79,7 @@ def plot_charts(df):
     plt.xticks(rotation=45)
     plt.text(df['date_hour'].mean() - 7, df['rain'].max() + 4,
              'avg. ' + str(round(df['rain'].mean(), 1)) + ' mm', fontsize=11, style='italic')
+    plt.grid(color='#DEDEDE', linestyle='--', linewidth=0.5)
     plt.figure(2).set_figwidth(10)
 
     plot_wind_speed_10m = df.plot(kind='line', x='date_hour', y='wind_speed_10m', color='#FF9A00', legend=False, xlabel='',
@@ -90,6 +92,7 @@ def plot_charts(df):
     plt.xlim(df['date_hour'].min(), df['date_hour'].max())
     plt.text(df['date_hour'].mean() - 1, df['wind_speed_10m'].max() + 4,
              'avg. ' + str(round(df['wind_speed_10m'].mean(), 1)) + ' m/s', fontsize=11, style='italic')
+    plt.grid(color='#DEDEDE', linestyle='--', linewidth=0.5)
     plt.figure(3).set_figwidth(10)
 
     # plt.show()
