@@ -1,5 +1,4 @@
 import json
-import requests
 import telegram
 import matplotlib
 from io import BytesIO
